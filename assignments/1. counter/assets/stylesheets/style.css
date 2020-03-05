@@ -1,0 +1,22 @@
+.counter_wrapper {
+    width: 410px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 2px 5px 10px #777;
+    padding: 35px 15px;
+    
+}
+
+button {
+    padding: 8px 20px;
+    margin: 0 10px;
+    text-transform: uppercase;
+    font-weight: 550;
+    border: 1px solid #000;
+    outline: 0;
+    background-color: ghostwhite;
+}
+.screen {
+    font-size: 38px;
+    background-color: rgb(255, 241, 241);
+}
