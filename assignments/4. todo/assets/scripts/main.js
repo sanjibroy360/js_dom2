@@ -2,14 +2,16 @@ let input = document.querySelector(".todo_input");
 let downArrow = document.querySelector(".down_arrow");
 let ul = document.querySelector('.todo_list');
 document.querySelector('.todo_wrapper').appendChild(ul);
-let database = [];
+let database = JSON.parse(localStorage.getItem('todos')) || [];
 let page;
+let footerCreated = false;
 let flag = 0;
 
 
 
 
 function displayItem(event, database) {
+    localStorage.setItem('todos',JSON.stringify(database));
     if(database.length === 0) {
         page = "all";
     }
@@ -19,6 +21,7 @@ function displayItem(event, database) {
             isDone: false
         });
         event.target.value = "";
+        
 
         ul.innerHTML = "";
         
@@ -40,11 +43,13 @@ function displayItem(event, database) {
             ul.after(createFooter());
             downArrow.style.visibility = "visible";
             console.log("1",downArrow);
+            localStorage.setItem('todos',JSON.stringify(database));
             
         } else {
-            createFooter();
+            
             updateFooter(database);
-            console.log("page",page)
+            console.log("page",page);
+            localStorage.setItem('todos',JSON.stringify(database));
         }
         
     }
@@ -66,6 +71,7 @@ function displayItem(event, database) {
 // </ul> -->
 
 function updateFooter(database) {
+    localStorage.setItem('todos',JSON.stringify(database));
     if (database.length === 0) {
         document.querySelector('footer').innerHTML = "";
         downArrow.style.visibility = "hidden";
@@ -110,7 +116,7 @@ function hideDelBtn(event) {
 function deleteItem(arr) {
     let id = event.target.parentNode.dataset.id;
     arr.splice(id, 1);
-
+    localStorage.setItem('todos',JSON.stringify(database));
     // console.log(id);
     console.log(database);
     updateFooter(arr)
@@ -122,6 +128,7 @@ function deleteItem(arr) {
     } else {
         displayActive(database,database.filter(el => !el.isDone));
     }
+    
 }
 
 function takeInput(arr, event) {
@@ -173,6 +180,7 @@ function editedValue(event) {
         parent.replaceChild(p, input);
 
         ul.innerHTML = "";
+        localStorage.setItem('todos',JSON.stringify(database));
 
         database.forEach((data, index) => structMade(data, index));
     }
@@ -191,6 +199,7 @@ function strikeItem(arr) {
     
 
     arr[id].isDone = !arr[id].isDone;
+    localStorage.setItem('todos',JSON.stringify(arr));
     if (arr[id].isDone) {
         checkbox.parentNode.children[1].classList.add("strike");
         document.querySelector('.clear_completed').classList.add("visible");
@@ -350,9 +359,16 @@ function displayActive(mainDatabase, filteredDatabase) {
 function displayAll(database) {
 
     page = "all";
+    // console.log("ul",ul);
     ul.innerHTML = "";
     database.forEach((data, index) => structMade(data, index));
-
+    if(!footerCreated) {
+        ul.after(createFooter());
+        footerCreated = true;
+    } else {
+        updateFooter(database);
+    }
+    
 
 
     let allButtons = document.querySelectorAll("button");
@@ -574,7 +590,7 @@ function structMade(data, id) {
     delBtn.addEventListener('click', () => deleteItem(database));
     checkTodo.addEventListener('click', () => strikeItem(database));
     // console.log("database li", database);
-
+ 
 }
 
 
@@ -603,6 +619,7 @@ function createFooter() {
     // }
 
     footerDiv.appendChild(footerItemLeft);
+    console.log('footerDiv',footerDiv);
 
 
     // footer ul
@@ -632,7 +649,7 @@ function createFooter() {
 
     footerDiv.appendChild(footerUl); //Append ul
 
-    
+   
 
     // All buttons
 
@@ -660,6 +677,7 @@ function createFooter() {
     footerLiActive.addEventListener('click', () => updateActive(database));
     footerLiAll.addEventListener('click', () => displayAll(database));
 
+    console.log(footerSec);
     return footerSec;
 
 
