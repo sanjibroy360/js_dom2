@@ -45,26 +45,28 @@ function createForm() {
 }
 
 function showResult(event) {
-    console.log(event);
+  
     let form = document.querySelector(".form");
 
 
     let name = document.querySelector(".name");
     let email = document.querySelector(".email");
     let password = document.querySelector(".password");
-
+    let nameError = "";
+    let emailError = "";
+    let passwordError = ""; 
 
     if(name.value.trim() === "") {
 
         console.log(name);
-        let p = document.createElement("p");
+        nameError = document.createElement("p");
         nameError.textContent = "Name can't be empty!";
         name.after(nameError);
 
     }
     
     if(email.value.trim() === "") {
-        let emailError = document.createElement("p");
+        emailError = document.createElement("p");
         emailError.textContent = "Email can't be empty!";
         email.after(emailError);
 
@@ -72,7 +74,7 @@ function showResult(event) {
     } 
     
     if(password.value.toString().trim() === "") {
-        let passwordError = document.createElement("p");
+        passwordError = document.createElement("p");
         passwordError.textContent = "Password can't be empty!";
         password.after(passwordError);
 
