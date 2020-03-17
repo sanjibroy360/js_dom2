@@ -1,0 +1,63 @@
+.form input {
+    display: block;
+    margin: 18px 0;
+    outline: 0;
+}
+
+.form_wrapper, .answer_wrapper {
+    position: relative;
+}
+
+.form, .results {
+    position: absolute;
+    left: 50%;
+    
+
+    transform: translate(-50%, 30%);
+    
+    padding: 90px 50px 60px 50px;
+    background-color: rgb(236, 248, 255);
+    border-radius: 10px;
+    box-shadow: 1px 5px 10px #777;
+}
+
+.name, .email, .password {
+    padding: 12px 15px;
+    border-radius: 6px;
+    background: transparent;
+    
+    font-weight: bold;
+    color: rgb(12, 12, 14);
+    font-size: 16px;
+    border: 1.3px solid rgb(0, 0, 0);
+    
+}
+
+.btn {
+    
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: 0;
+    
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    background-color:rgb(9, 70, 9);
+    color: ivory;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+pre {
+    font-size: 22px;
+}
+
